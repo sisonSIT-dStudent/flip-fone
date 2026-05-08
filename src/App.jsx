@@ -23,7 +23,7 @@ const GADGET_DATA = [
     model: "iPhone 13 Pro Max",
     price: 22000,
     specs: "128GB",
-    status: 'available',
+    status: 'sold',
     condition: "76% Battery Health",
     image: "/images/13pm.jpg", 
     description: "Openline, Factory unlock, True tone working, Face id working, No history of repair.",
@@ -165,28 +165,41 @@ export default function App() {
           </div>
         </header>
 
-        <main className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 mb-20">
-          {filteredGadgets.map((item) => (
-            <div 
-              key={item.id} 
-              onClick={() => handleOpenModal(item)} 
-              className="group bg-zinc-900 border border-zinc-800 rounded-2xl md:rounded-3xl overflow-hidden transition-all active:scale-95 md:hover:border-blue-500/50 cursor-pointer"
-            >
-              <div className="relative aspect-square overflow-hidden bg-zinc-800">
-                <img src={item.image} className={`w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110 ${item.status === 'sold' ? 'grayscale opacity-30' : ''}`} alt={item.model} />
-                {item.status === 'sold' && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                     <span className="bg-white text-black font-black px-2 py-1 -rotate-12 uppercase text-[10px] md:text-sm">SOLD OUT</span>
+        <main className="max-w-6xl mx-auto mb-20">
+          {filteredGadgets.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
+              {filteredGadgets.map((item) => (
+                <div 
+                  key={item.id} 
+                  onClick={() => handleOpenModal(item)} 
+                  className="group bg-zinc-900 border border-zinc-800 rounded-2xl md:rounded-3xl overflow-hidden transition-all active:scale-95 md:hover:border-blue-500/50 cursor-pointer"
+                >
+                  <div className="relative aspect-square overflow-hidden bg-zinc-800">
+                    <img src={item.image} className={`w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110 ${item.status === 'sold' ? 'grayscale opacity-30' : ''}`} alt={item.model} />
+                    {item.status === 'sold' && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                         <span className="bg-white text-black font-black px-2 py-1 -rotate-12 uppercase text-[10px] md:text-sm">SOLD OUT</span>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              <div className="p-3 md:p-6">
-                <h3 className="font-bold text-[11px] md:text-lg uppercase mb-1 truncate">{item.model}</h3>
-                <span className="bg-zinc-800 text-zinc-400 text-[7px] md:text-[9px] font-bold px-1.5 py-0.5 rounded border border-zinc-700">{item.specs}</span>
-                <p className="text-sm md:text-2xl font-black text-blue-500 mt-2 md:mt-4">₱{item.price.toLocaleString()}</p>
-              </div>
+                  <div className="p-3 md:p-6">
+                    <h3 className="font-bold text-[11px] md:text-lg uppercase mb-1 truncate">{item.model}</h3>
+                    <span className="bg-zinc-800 text-zinc-400 text-[7px] md:text-[9px] font-bold px-1.5 py-0.5 rounded border border-zinc-700">{item.specs}</span>
+                    <p className="text-sm md:text-2xl font-black text-blue-500 mt-2 md:mt-4">₱{item.price.toLocaleString()}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-zinc-800 rounded-[2rem]">
+              <p className="text-zinc-500 font-black uppercase tracking-[0.2em] text-sm text-center">
+                No available units
+              </p>
+              <p className="text-zinc-700 text-[10px] uppercase font-bold mt-2">
+                Check back later for new arrivals!
+              </p>
+            </div>
+          )}
         </main>
 
         {selectedItem && (
