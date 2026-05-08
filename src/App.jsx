@@ -80,6 +80,21 @@ const GADGET_DATA = [
       { type: 'image', url: "/images/14p1.jpg" },
       { type: 'image', url: "/images/14p2.jpg" },
     ]
+  },
+  {
+    id: 5, 
+    model: "iPhone X", 
+    price: 7500, 
+    specs: "128GB | 77% Battery health", 
+    status: 'available', 
+    condition: "Good condition", 
+    image: "/images/iphonex.jpg",
+    description: "Openline, factory unlock, tempered glass included, Case included",
+    media: [
+      { type: 'image', url: "/images/14p.jpg" },
+      { type: 'image', url: "/images/14p1.jpg" },
+      { type: 'image', url: "/images/14p2.jpg" },
+    ]
   }
 ];
 
