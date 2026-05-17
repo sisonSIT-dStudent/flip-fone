@@ -86,7 +86,7 @@ const GADGET_DATA = [
     model: "iPhone Xr", 
     price: 7500, 
     specs: "128GB | 77% Battery health", 
-    status: 'available', 
+    status: 'sold', 
     condition: "Good condition", 
     image: "/images/iphonex.jpg",
     description: "Openline, factory unlock, tempered glass included, Case included",
@@ -94,6 +94,38 @@ const GADGET_DATA = [
       { type: 'image', url: "/images/iphonex.jpg" },
       { type: 'image', url: "/images/iphonex2.jpg" },
       { type: 'image', url: "/images/iphonex3.jpg" },
+    ]
+  },
+  {
+    id: 5, 
+    model: "iPhone 13 Pro Max", 
+    price: 19500, 
+    specs: "128GB | 76% Battery health", 
+    status: 'available', 
+    condition: "Back lens issue", 
+    image: "/ip13pm.jpg",
+    description: "Openline, factory unlock, No repair history, Case included",
+    media: [
+      { type: 'image', url: "/ip13pm.jpg" },
+      { type: 'image', url: "/ip13pm1.jpg" },
+      { type: 'image', url: "/ip13pm2.jpg" },
+      { type: 'image', url: "/13pm3.jpg" },
+    ]
+  },
+  {
+    id: 5, 
+    model: "iPhone 13", 
+    price: 12500, 
+    specs: "128GB | 76% Battery health", 
+    status: 'available', 
+    condition: "Good condition | ISSUE: Back lens have slight hairline", 
+    image: "/ip13.jpg",
+    description: "Openline, factory unlock, No repair history, Case included",
+    media: [
+      { type: 'image', url: "/ip13.jpg" },
+      { type: 'image', url: "/ip131.jpg" },
+      { type: 'image', url: "/ip132.jpg" },
+      { type: 'image', url: "/ip133.jpg" },
     ]
   }
 ];
@@ -105,7 +137,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isImageLoading, setIsImageLoading] = useState(true);
 
-  // NEW: Pre-load all media for the selected item so flipping is instant
+  // Pre-load all media for the selected item so flipping is instant
   useEffect(() => {
     if (selectedItem && selectedItem.media) {
       selectedItem.media.forEach((item) => {
@@ -183,9 +215,10 @@ export default function App() {
         <main className="max-w-6xl mx-auto mb-20">
           {filteredGadgets.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
-              {filteredGadgets.map((item) => (
+              {/* Added index alongside item to create a strictly guaranteed unique key for duplicate IDs */}
+              {filteredGadgets.map((item, index) => (
                 <div 
-                  key={item.id} 
+                  key={`${item.id}-${index}`} 
                   onClick={() => handleOpenModal(item)} 
                   className="group bg-zinc-900 border border-zinc-800 rounded-2xl md:rounded-3xl overflow-hidden transition-all active:scale-95 md:hover:border-blue-500/50 cursor-pointer"
                 >
@@ -208,10 +241,10 @@ export default function App() {
           ) : (
             <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-zinc-800 rounded-[2rem]">
               <p className="text-zinc-500 font-black uppercase tracking-[0.2em] text-sm text-center">
-                No available units
+                No units found
               </p>
               <p className="text-zinc-700 text-[10px] uppercase font-bold mt-2">
-                Check back later for new arrivals!
+                Try searching for another model!
               </p>
             </div>
           )}
@@ -240,11 +273,12 @@ export default function App() {
                   alt=""
                 />
                 
+                {/* Fixed the modal image scale layout wrapper without modifying products */}
                 <img 
                   key={selectedItem.media[currentMediaIndex].url}
                   src={selectedItem.media[currentMediaIndex].url} 
                   onLoad={() => setIsImageLoading(false)}
-                  className={`relative z-10 w-full h-full object-cover scale-[1.2] transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`} 
+                  className={`relative z-10 w-full h-full object-cover scale-100 transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`} 
                   alt="Product view"
                 />
 
