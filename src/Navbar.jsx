@@ -35,7 +35,7 @@ export default function Navbar() {
           className="group flex items-center gap-3 cursor-pointer"
         >
           <img 
-            src="images/ivanpic2.png" 
+            src="/images/ivanpfp.jpg"
             alt="Ivan" 
             className="w-15 h-15 rounded-full border-2 border-blue-500 object-cover shadow-lg shadow-blue-500/20"
           />
