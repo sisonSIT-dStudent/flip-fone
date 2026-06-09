@@ -137,7 +137,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isImageLoading, setIsImageLoading] = useState(true);
 
-  // Pre-load all media for the selected item so flipping is instant
+  
   useEffect(() => {
     if (selectedItem && selectedItem.media) {
       selectedItem.media.forEach((item) => {
@@ -273,7 +273,7 @@ export default function App() {
                   alt=""
                 />
                 
-                {/* Fixed the modal image scale layout wrapper without modifying products */}
+                
                 <img 
                   key={selectedItem.media[currentMediaIndex].url}
                   src={selectedItem.media[currentMediaIndex].url} 
