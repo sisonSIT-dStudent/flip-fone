@@ -215,7 +215,7 @@ export default function App() {
         <main className="max-w-6xl mx-auto mb-20">
           {filteredGadgets.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
-              {/* Added index alongside item to create a strictly guaranteed unique key for duplicate IDs */}
+              
               {filteredGadgets.map((item, index) => (
                 <div 
                   key={`${item.id}-${index}`} 
